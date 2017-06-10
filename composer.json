@@ -1,0 +1,32 @@
+{
+    "name": "analysiswebapp/webapp",
+    "description": "This is an web application used for analysis of malicious emails",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vegard",
+            "email": "vegarfa@stud.ntnu.no"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "twig/twig": "1.16.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "analysiswebapp\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t web web/index.php",
+        "test": "phpunit --colors --bootstrap vendor/autoload.php test/",
+        "down": "analysiswebapp\\webapp\\Sql::down",
+        "up": "analysiswebapp\\webapp\\Sql::up"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "~2.3",
+        "phpmd/phpmd": "~2.2",
+        "phpunit/phpunit": "~4.6"
+    }
+}

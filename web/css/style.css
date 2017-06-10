@@ -1,0 +1,44 @@
+#primary-content {
+    margin: 100px 0;
+    margin-left: 50px;
+    padding-top: 0;
+}
+
+@media (min-height: 320px) {
+    .ui.footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.emails table
+{
+    margin-top: 100px;
+}
+
+th
+{
+    text-align: left;
+}
+
+th, td
+{
+    padding-left: 150px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+body {
+  padding-top: 10px;
+}
+
+.description
+{
+    margin-top: 50px;
+}
+
+.adminEmails
+{
+    margin-top: 50px;
+}

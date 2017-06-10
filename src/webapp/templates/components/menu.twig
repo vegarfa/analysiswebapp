@@ -1,0 +1,19 @@
+<div class="ui container">
+    <a href="/" class="header item">
+        {{ recipient|default(recipientVar) }}
+    </a>
+    <a href="{{ urlFor('infopage') }}" class="item">Info</a>
+    <a href="{{ urlFor('menupage') }}" class="item">Menu</a>
+    <a href="{{ urlFor('showemails') }}" class="item">Emails</a>
+    <a href="{{ urlFor('emailtrends') }}" class="item">Email Trends</a>
+    <a href="{{ urlFor('mailtrends') }}" class="item">Mail Trends (Incomplete)</a>
+    <div class="right menu">
+        {% if isLoggedIn %}
+            <a href="#" class="item">Logged in as {{ loggedInUsername }}</a>
+            <a href="{{ urlFor('logout') }}" class="item">Log out</a>
+        {% else %}
+            <a href="{{ urlFor('newuser') }}" class="item">Create account</a>
+            <a href="/login" class="item">Log in</a>
+        {% endif %}
+    </div>
+</div>

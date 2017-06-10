@@ -1,0 +1,47 @@
+{% extends 'layouts/promotional.twig' %}
+
+{% block content %}
+    <h2>New user</h2>
+
+    {% if flash.error %}
+        <div class="ui error message">
+            {{ flash.error|raw }}
+        </div>
+    {% endif %}
+
+    {% if flash.info %}
+        <div class="ui warning message">
+            {{ flash.info }}
+        </div>
+    {% endif %}
+
+    <form action="" method="post" class="ui form">
+        <div class="field">
+            <label>Username* (Must be between 3 and 25 characters)</label>
+            <input type="text" name="user" value="{{ username }}" pattern=".{3,25}">
+        </div>
+
+        <div class="field">
+            <label>Password* (Must be between 8 and 25 characters. Lower and uppercase letters, one number and one special characters)</label>
+            <input type="password" name="pass" pattern=".{8,25}">
+        </div>
+
+        <div class="field">
+            <label>First name* (Not visible to others)</label>
+            <input type="text" name="first_name">
+        </div>
+
+        <div class="field">
+            <label>Last name* (Not visible to others)</label>
+            <input type="text" name="last_name">
+        </div>
+
+        <div class="field">
+            <label>Email (Valid email address)</label>
+            <input type="text" name="email" value="{{ user.email }}">
+        </div>
+
+        <input type="hidden" name="token" value="{{ token }}">
+        <input type="submit" name="submit" value="Create new user" class="positive ui button">
+    </form>
+{% endblock %}

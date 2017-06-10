@@ -1,0 +1,47 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    <h2>User</h2>
+
+    {% if flash.error %}
+        <div class="ui error message">
+            {{ flash.error|raw }}
+        </div>
+    {% endif %}
+
+    {% if flash.info %}
+        <div class="ui warning message">
+            {{ flash.info }}
+        </div>
+    {% endif %}
+
+    {% if user %}
+        <table class="ui definition table">
+            <tr>
+                <td>Id</td>
+                <td>{{ user.userid }}</td>
+            </tr>
+
+            <tr>
+                <td>Username</td>
+                <td>{{ user.username }}</td>
+            </tr>
+
+            <tr>
+                <td>First Name</td>
+                <td>{{ user.firstName }}</td>
+            </tr>
+
+            <tr>
+                <td>Last Name</td>
+                <td>{{ user.lastName }}</td>
+            </tr>
+
+        </table>
+
+    {% else %}
+        <div class="ui error message">
+            Could not find a user with username "{{ username }}".
+        </div>
+    {% endif %}
+{% endblock %}

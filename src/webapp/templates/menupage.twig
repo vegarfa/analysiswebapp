@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% set recipientVar = 'OJ! Email' %}
+        {% include 'components/head.twig' %}
+    </head>
+
+    <body>
+        <div class="ui grey fixed inverted menu">
+            {% include 'components/menu.twig' %}
+        </div>
+
+        <div id="primary-content" class="ui grid container">
+            <div class="three wide column">
+                <div class="ui secondary vertical pointing fluid menu">
+                  <h1> Menu: </h1>
+                    {% if isAdmin %}
+                    <a href="{{ urlFor('admin') }}" class="item">Admin section</a>
+                    <a href="{{ urlFor('updateEmails') }}" class="item">Update emails</a>
+                    <a href="{{ urlFor('analysisEngine') }}" class="item">Analysis engine</a>
+                    {% endif %}
+
+                    {% if isLoggedIn %}
+                    <a href="{{ urlFor('showemails') }}" class="item">Show emails</a>
+                    <a href="{{ urlFor('editprofile') }}" class="item">Edit profile</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div id="primary-content" class="ui text container">
+                {% if flash.info %}
+                    <div class="ui warning message">
+                        {{ flash.info }}
+                    </div>
+                {% endif %}
+                <h3> Generell description: </h3>
+                {% if isAdmin %}
+                <h5>Admin section:</h5>
+                Administer emails and users
+                <h5>Update emails:</h5>
+                Run update engine for updating emails from mailserver
+                <h5>Analysis engine:</h5>
+                Run analysis engine for analysis and classification of emails
+                {% endif %}
+                {% if isLoggedIn %}
+                <h5>Show emails:</h5>
+                Show information about emails recieved
+                <h5>Edit profile:</h5>
+                Edit user profile
+                <h5></h5>
+                {% endif %}
+                {% block content %}
+                {% endblock %}
+
+            </div>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                {% block footer %}OJ! Email 2017{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

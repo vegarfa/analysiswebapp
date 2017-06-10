@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% set recipientVar = 'OJ! Email' %}
+        {% include 'components/head.twig' %}
+    </head>
+
+    <body>
+        <div class="ui grey fixed inverted menu">
+            {% include 'components/menu.twig' %}
+        </div>
+
+        <div id="primary-content" class="ui grid container">
+            <div class="three wide column">
+                <div class="ui secondary vertical pointing fluid menu">
+                <img src="https://drive.google.com/uc?id=0B_oSATgwhCp0ajdWY3NjZnBFU2c" width="300" height="200"/>
+                </div>
+            </div>
+
+            <div id="primary-content" class="ui text container">
+                {% if flash.info %}
+                    <div class="ui warning message">
+                        {{ flash.info }}
+                    </div>
+                {% endif %}
+                <h1>Welcome to the OJ! Email web application</h1>
+
+                    <h3>OJ! Email</h3>
+
+                    <p>Use the OJ! button to report suspicious emails that arrive to your inbox. Your reporting is a valuable contribution to preventing phishing, fraud and other types of security threats.</p>
+
+                    <p>If you wish to contact us about anything, feel free to send us an email:</p>
+
+                    {% if users %}
+                  <div class="ui link cards">
+                    {% for user in users %}
+                        {% if user.userid == 3 %}
+                        <div class="card">
+                            <div class="content">
+                                <div class="header">
+                                        Support
+                                </div>
+                                <div class="description">
+                                    {{ user.email }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <p>No users are in the database.</p>
+                    {% endif %}
+
+            </div>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                {% block footer %}OJ! Email 2017{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

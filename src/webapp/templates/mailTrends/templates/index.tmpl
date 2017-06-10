@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  {% set recipientVar = 'OJ! Email' %}
+  {% include 'components/head.twig' %}
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Email Trends</title>
+
+  <script type="text/javascript" src="/css/jquery.js"></script>
+  <script type="text/javascript">
+    var MAIL_HOST = "${host}";
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script type="text/javascript" src="/css/main.js"></script>
+</head>
+<body>
+  <div class="ui grey fixed inverted menu">
+      {% include 'components/menu.twig' %}
+  </div>
+#for $stat in $stats
+  $stat.GetHtml
+#end for
+</body>
+</html>

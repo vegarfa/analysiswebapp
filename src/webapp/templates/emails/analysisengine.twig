@@ -1,0 +1,52 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+
+    <h2>Automatic analysis of emails</h2>
+
+    {% if flash.error %}
+        <div class="ui error message">
+            {{ flash.error|raw }}
+        </div>
+    {% endif %}
+
+    {% if flash.success %}
+        <div class="ui success message">
+            {{ flash.success }}
+        </div>
+    {% endif %}
+
+
+<script>
+
+var message;
+var button;
+
+window.onload = function () {
+    message = document.getElementById('message');
+    button = document.getElementById('button');
+}
+
+function post(url, params) {
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            button.disabled = false;
+            message.innerHTML = 'Complete!';
+        }
+    }
+    http.send();
+}
+
+function automaticAnalysis() {
+    var url = 'analysisengine'; // As defined in app.php
+    post(url, '');
+
+    button.disabled = true;
+    message.innerHTML = 'Analyzing emails... <img src="https://thenewboston.com/images/forum/upload/2016-06-13/3fda408e224e579d30ca0289bae1c5f3.gif">';
+}
+</script>
+    <input id="button" type="button" value="AnalysisEngine" onclick="automaticAnalysis()">
+    <div id="message"></div>
+{% endblock %}

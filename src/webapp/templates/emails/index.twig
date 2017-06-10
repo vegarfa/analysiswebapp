@@ -1,0 +1,112 @@
+{% extends 'layouts/base2.twig' %}
+
+{% block content %}
+
+    {% if flash.msg %}
+      <div class="ui warning message">
+          {{ flash.msg }}
+        </div>
+    {% endif %}
+
+    <h2>Search for Emails</h2>
+    {% set searchcounter = 0 %}
+    {% for searchWord in search %}
+    {% set searchcounter = searchcounter + 1 %}
+    {% endfor %}
+    <div class="subtitle">
+      <h3>Number of emails matched search criteria: {{ searchcounter }} </h3>
+    </div>
+
+    <form action="" method="post" class="ui form">
+      <div class="fields">
+        <div class="ten  field">
+          <input type="text" name="emailsID" placeholder="DatabaseID">
+          </div>
+          <div class="ten  field">
+            <input type="text" name="innerdate" placeholder="Date & Time">
+            </div>
+        <div class="ten  field">
+          <input type="text" name="outerFrom" placeholder="To">
+          </div>
+        <div class="ten  field">
+          <input type="text" name="innerFrom" placeholder="From">
+          </div>
+        <div class="ten  field">
+          <input type="text" name="innersubject" placeholder="Subject">
+          </div>
+        <input type="submit" name="submit" value="Search" class="positive ui button">
+      </div>
+
+      <table class="ui single line table">
+        <thead>
+          <tr>
+            <th>DatabaseID:</th>
+            <th>Date & Time:</th>
+            <th>To:</th>
+            <th>From:</th>
+            <th>Subject:</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for searchWord in search %}
+          <tr>
+            <td><a href="/emails/{{searchWord.emailsID}}">{{ searchWord.emailsID }}</a></td>
+            <td> {{ searchWord.innerdate }} </td>
+            <td> {{ searchWord.outerFrom }} </td>
+            <td> {{ searchWord.innerFrom }} </td>
+            <td> {{ searchWord.innersubject }} </td>
+          </tr>
+            {% endfor %}
+
+            {% if search is empty %}
+            <tr>
+                <td colspan="3">No emails matched your search, please use your email address as search criteria</td>
+            </tr>
+            {% endif %}
+        </tbody>
+      </table>
+
+      <input type="hidden" name="token" value="{{ token }}">
+    </form>
+
+    <h2>Emails</h2>
+    {% set counter = 0 %}
+    {% for emails in emails %}
+    {% set counter = counter + 1 %}
+    {% endfor %}
+    <div class="subtitle">
+      <h3>Number of emails reported: {{ counter }} </h3>
+    </div>
+
+        <table class="ui single line table">
+          <thead>
+          <tr>
+            <th>DatabaseID:</th>
+            <th>Date & Time:</th>
+            <th>To:</th>
+            <th>From:</th>
+            <th>Subject:</th>
+          </tr>
+          </thead>
+
+        <tbody>
+            {% for emails in emails %}
+        	<tr>
+            <td><a href="/emails/{{ emails.emailsID }}">{{ emails.emailsID }}</a></td>
+            <td>{{ emails.innerdate }}</td>
+            <td>{{ emails.outerFrom }}</td>
+        		<td>{{ emails.innerFrom }}</td>
+            <td>{{ emails.innersubject }}</td>
+        	</tr>
+        	{% endfor %}
+
+            {% if emails is empty %}
+            <tr>
+                <td colspan="3">There are no emails registered yet!</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

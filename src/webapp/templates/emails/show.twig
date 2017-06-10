@@ -1,0 +1,169 @@
+{% extends 'layouts/base2.twig' %}
+
+{% block content %}
+    {% if emails %}
+        <h2 class="ui header">
+          <h2>Administer this email</h2>
+        </h2>
+
+        {% if flash.msg %}
+            <div class="ui warning message">
+                {{ flash.msg }}
+            </div>
+        {% endif %}
+
+        <table class="ui definition table">
+            <tr>
+                <td>DatabaseID</td>
+                <td>{{ emails.emailsID }}</td>
+            </tr>
+
+        </table>
+
+        <table class="ui definition table">
+        <tr><h4>User feedback</h4></tr>
+        <tr>
+            <td>Degree of severity</td>
+            <td>Not implemented</td>
+        </tr>
+
+        <tr>
+            <td>Comments</td>
+            <td>Not implemented</td>
+        </tr>
+
+        <tr>
+            <td>Ranking based on user feedback and message headers</td>
+            <td>Not implemented</td>
+        </tr>
+
+        </table>
+
+        <table class="ui definition table">
+            <tr><h4>Data from email received by OJ!</h4></tr>
+
+            <tr>
+                <td>MessageID</td>
+                <td>{{ emails.outermessageid }}</td>
+            </tr>
+
+            <tr>
+                <td>To</td>
+                <td>{{ emails.outerTo }}</td>
+            </tr>
+
+<!--
+            <tr>
+                <td>From</td>
+                <td>{{ emails.outerFrom }}</td>
+            </tr>
+
+            <tr>
+                <td>Subject</td>
+                <td>{{ emails.outersubject }}</td>
+            </tr>
+-->
+
+            <tr>
+                <td>Date & Time</td>
+                <td>{{ emails.outerdate }}</td>
+            </tr>
+
+        </table>
+
+        <table class="ui definition table">
+            <tr><h4>Data from attachment in email received by OJ!</h4></tr>
+
+            <tr>
+                <td>MessageID</td>
+                <td>{{ emails.innermessageid }}</td>
+            </tr>
+
+            {% if emails.innerTo is not null %}
+            <tr>
+                <td>To</td>
+                <td>{{ emails.innerTo }}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.innerFrom is not null %}
+            <tr>
+                <td>From</td>
+                <td>{{ emails.innerFrom }}</td>
+            </tr>
+            {% endif %}
+
+            <tr>
+                <td>Subject</td>
+                <td>{{ emails.innersubject }}</td>
+            </tr>
+
+            <tr>
+                <td>Date & Time</td>
+                <td>{{ emails.innerdate }}</td>
+            </tr>
+
+            {% if emails.metadata is not null %}
+            <tr>
+                <td>Received:</td>
+                <td>{{ emails.metadata | raw}}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.received_domain is not null %}
+            <tr>
+                <td>Received domain:</td>
+                <td>{{ emails.received_domain }}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.received_ip is not null %}
+            <tr>
+                <td>Received IP:</td>
+                <td>{{ emails.received_ip }}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.received_foremail is not null %}
+            <tr>
+                <td>Received for email:</td>
+                <td>{{ emails.received_foremail }}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.received_email is not null %}
+            <tr>
+                <td>Received email:</td>
+                <td>{{ emails.received_email }}</td>
+            </tr>
+            {% endif %}
+
+            {% if emails.all_fields is not null %}
+            <tr>
+                <td colspan="2">Additional Headers:<br />
+                {% autoescape 'html' %}
+                    {{ emails.all_fields | raw}}
+                    {% endautoescape %}
+                </td>
+            </tr>
+            {% endif %}
+
+<!--
+            <tr>
+                <td>Received</td>
+                <td>{{ emails.innerreceived }}</td>
+            </tr>
+-->
+            <tr>
+                <td>Message body:</td>
+                <td>{{ emails.body | raw}}</td>
+            </tr>
+
+        </table>
+
+    {% else %}
+        <div class="ui error message">
+            Unable to find that emails.
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% set recipientVar = 'OJ! Email' %}
+        {% include 'components/head.twig' %}
+    </head>
+
+    <body>
+        <div class="ui grey fixed inverted menu">
+            {% include 'components/menu.twig' %}
+        </div>
+
+        <div id="primary-content" class="ui grid container">
+            <div class="three wide column">
+                <div class="ui secondary vertical pointing fluid menu">
+                <img src="https://drive.google.com/uc?id=0B_oSATgwhCp0ajdWY3NjZnBFU2c" width="300" height="200"/>
+                </div>
+            </div>
+
+            <div id="primary-content" class="ui text container">
+                {% if flash.info %}
+                    <div class="ui warning message">
+                        {{ flash.info }}
+                    </div>
+                {% endif %}
+                <h1>Information</h1>
+
+                    <h3>OJ! Email</h3>
+{{ "Email provides us a convenient and powerful communications tool. Unfortunately, it also provides scammers and other malicious individuals an easy means for luring potential victims. The scams they attempt run from old-fashioned bait-and-switch operations to phishing schemes using a combination of email and bogus web sites to trick victims into divulging sensitive information. To protect yourself from these scams, you should understand what they are, what they look like, how they work, and what you can do to avoid them. The following recommendations can minimize your chances of falling victim to an email scam: \n
+  • Don’t trust unsolicited email.
+  • Treat email attachments with caution.
+  • Don’t click links in suspicious email messages.\n
+    Ignoring these recommandations may leave you vulnerable to identity theft, information theft, the abuse of your computer for illegal activity, the receipt of bogus or illegal merchandise, and financial loss.\n\n" |nl2br }}
+
+            <p> More information on how to recognize and avoid email scams can be found at: <a href="https://www.us-cert.gov/sites/default/files/publications/emailscams_0905.pdf" style="text-decoration:none;" target="_blank">US-CERT</a> </p>
+            <p> An informative video on Spotting Phishing Emails can be found here: <a href="https://www.youtube.com/watch?v=9k1Iggc_BI4" style="text-decoration:none;" target="_blank">Example Phishing</a> </p>
+            <p> An informative video on Fraud and Social Engineering can be found here: <a href="https://www.youtube.com/watch?v=NMHxFLWF75w" style="text-decoration:none;" target="_blank">Example Fraud</a> </p>
+
+            </div>
+        </div>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                {% block footer %}OJ! Email 2017{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
