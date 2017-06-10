@@ -17,19 +17,49 @@
   <div class="ui grey fixed inverted menu">
       {% include 'components/menu.twig' %}
   </div>
-  <h1>Mail Trends</h1>
+
+  <div id="primary-content" class="ui grid container">
+      <div class="three wide column">
+          <div class="ui secondary vertical pointing fluid menu">
+              {% if isLoggedIn %}
+              <a href="{{ urlFor('topemails') }}" class="item">Top emails</a>
+              <a href="{{ urlFor('topsenders') }}" class="item">Top senders</a>
+              <a href="{{ urlFor('topsize') }}" class="item">Top size</a>
+              <a href="{{ urlFor('topnotifiers') }}" class="item">Top notifiers</a>
+              <a href="{{ urlFor('timeofrecemails') }}" class="item">Time of received email</a>
+              <a href="{{ urlFor('timeofrepemails') }}" class="item">Time of reported email</a>
+              <a href="{{ urlFor('mailtrends') }}" class="item">Email trends</a>
+              {% endif %}
+          </div>
+      </div>
+
+  <div class="subtitle">
+    <h1>Email Trends</h1>
+  {% set emailcounter = 0 %}
+  {% for emails in emails %}
+  {% set emailcounter = emailcounter + 1 %}
+  {% endfor %}
+<h3>{{ emailcounter }} emails reported between
+{% for emails in emails %}
+  {% if loop.last %}
+    {{ emails.innerdate }}
+    {% endif %}
+{% endfor %}
+and
+{% for emails in emails %}
+  {% if loop.first %}
+    {{ emails.innerdate }}
+    {% endif %}
+{% endfor %}
+</h3>
+  </div>
+
 <div class="subtitle">
 </div>
   <div class="stat-tabs">
   <ul class="stat-tabs-titles">
       <li onclick="toggleTabStat('tab-0')" id="tab-0-title" class="stat-tab-title unselectable">Last received emails </li>
-      <li onclick="toggleTabStat('tab-1')" id="tab-1-title" class="stat-tab-title unselectable">Top senders </li>
-      <li onclick="toggleTabStat('tab-2')" id="tab-2-title" class="stat-tab-title unselectable">Top subjects </li>
-      <li onclick="toggleTabStat('tab-3')" id="tab-3-title" class="stat-tab-title unselectable">Top time of receiving email </li>
-      <li onclick="toggleTabStat('tab-4')" id="tab-4-title" class="stat-tab-title unselectable">Top size of email</li>
-      <li onclick="toggleTabStat('tab-5')" id="tab-5-title" class="stat-tab-title unselectable">Last reported emails </li>
-      <li onclick="toggleTabStat('tab-6')" id="tab-6-title" class="stat-tab-title unselectable">Top notifiers</li>
-      <li onclick="toggleTabStat('tab-7')" id="tab-7-title" class="stat-tab-title unselectable">Top time of reporting</li>
+      <li onclick="toggleTabStat('tab-1')" id="tab-1-title" class="stat-tab-title unselectable">Last reported emails </li>
   </ul>
 
   <div id="tab-0-pane" class="stat-tab-pane hidden">
@@ -48,7 +78,7 @@
 -->
     </select>
 
-    Last received emails by date and time
+  Last received emails by date and time
 
   </h3>
       <table class="table-stat top50">
@@ -83,7 +113,7 @@
       <table class="stat-group">
 <tr>
   <td class="stat-group-item">
-    <div class="stat table-stat-container" id="stat-2">
+    <div class="stat table-stat-container" id="stat-1">
     </td>
   </tr>
   <h3>
@@ -94,185 +124,6 @@
       <option value="top100">100</option>
 -->
     </select>
-
-      Top messages by sender address
-
-    </h3>
-        <table class="table-stat top50">
-          <thead>
-          <tr>
-            <th>From:</th>
-            <th>Number of emails reported:</th>
-          </tr>
-          </thead>
-
-        <tbody>
-            {% for emails in emails %}
-          <tr>
-            <td>{{ emails.innerFrom }}</td>
-            <td>{{ emails.reported }}</td>
-          </tr>
-          {% endfor %}
-            {% if emails is empty %}
-            <tr>
-                <td colspan="3">There are no emails registered yet!</td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
-  </div>
-
-  <div id="tab-2-pane" class="stat-tab-pane hidden">
-      <table class="stat-group">
-<tr>
-  <td class="stat-group-item">
-    <div class="stat" id="stat-2">
-    </td>
-  </tr>
-  <div class="subtitle">
-  </div>
-  <h3>
-    <select onchange="toggleTableStatTop(this)">
-      <option value="top50">50</option>
-<!--
-      <option value="top25">Top 25</option>
-      <option value="top50">Top 50</option>
--->     <option value="top100">Top 100</option>
-    </select>
-
-    Top messages by subject
-
-  </h3>
-      <table class="table-stat top50">
-        <thead>
-        <tr>
-          <th>Subject:</th>
-          <th>Number of emails reported:</th>
-        </tr>
-        </thead>
-
-      <tbody>
-          {% for emails in emails %}
-        <tr>
-          <td>{{ emails.innersubject }}</td>
-          <td>{{ emails.reported }}</td>
-        </tr>
-        {% endfor %}
-
-          {% if emails is empty %}
-          <tr>
-              <td colspan="3">There are no emails registered yet!</td>
-          </tr>
-          {% endif %}
-      </tbody>
-  </table>
-</div>
-<div id="tab-3-pane" class="stat-tab-pane hidden">
-    <table class="stat-group">
-<tr>
-<td class="stat-group-item">
-  <div class="stat" id="stat-3">
-  </td>
-</tr>
-<div class="subtitle">
-</div>
-<h3>
-  <select onchange="toggleTableStatTop(this)">
-    <option value="top50">50</option>
-<!--
-    <option value="top25">Top 25</option>
-    <option value="top50">Top 50</option>
--->     <option value="top100">Top 100</option>
-  </select>
-
-  Top time of receiving email
-
-</h3>
-    <table class="table-stat top50">
-      <thead>
-      <tr>
-        <th>Date:</th>
-      </tr>
-      </thead>
-
-    <tbody>
-        {% for emails in emails %}
-      <tr>
-        <td>{{ emails.innerdate }}</td>
-      </tr>
-      {% endfor %}
-
-        {% if emails is empty %}
-        <tr>
-            <td colspan="3">There are no emails registered yet!</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-</div>
-
-<div id="tab-4-pane" class="stat-tab-pane hidden">
-    <table class="stat-group">
-<tr>
-<td class="stat-group-item">
-  <div class="stat" id="stat-4">
-  </td>
-</tr>
-<div class="subtitle">
-</div>
-<h3>
-  <select onchange="toggleTableStatTop(this)">
-    <option value="top50">50</option>
-<!--
-    <option value="top25">Top 25</option>
-    <option value="top50">Top 50</option>
--->     <option value="top100">Top 100</option>
-  </select>
-
-  Top messages by size
-
-</h3>
-    <table class="table-stat top50">
-      <thead>
-      <tr>
-        <th>Size:</th>
-        <th>From:</th>
-        <th>Subject:</th>
-      </tr>
-      </thead>
-
-    <tbody>
-        {% for emails in emails %}
-      <tr>
-        <td>{{ emails.size }}</td>
-        <td>{{ emails.innerFrom }}</td>
-        <td>{{ emails.innersubject }}</td>
-      </tr>
-      {% endfor %}
-
-        {% if emails is empty %}
-        <tr>
-            <td colspan="3">There are no emails registered yet!</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-</div>
-<div id="tab-5-pane" class="stat-tab-pane hidden">
-    <table class="stat-group">
-<tr>
-<td class="stat-group-item">
-  <div class="stat table-stat-container" id="stat-5">
-  </td>
-</tr>
-<h3>
-  <select onchange="toggleTableStatTop(this)">
-    <option value="top50">50</option>
-<!--
-    <option value="top25">25</option>
-    <option value="top100">100</option>
--->
-  </select>
 
   Last reported emails by date and time
 
@@ -304,94 +155,7 @@
     </tbody>
 </table>
 </div>
-<div id="tab-6-pane" class="stat-tab-pane hidden">
-    <table class="stat-group">
-<tr>
-<td class="stat-group-item">
-  <div class="stat" id="stat-6">
-  </td>
-</tr>
-<div class="subtitle">
-</div>
-<h3>
-  <select onchange="toggleTableStatTop(this)">
-    <option value="top50">50</option>
-<!--
-    <option value="top25">Top 25</option>
-    <option value="top50">Top 50</option>
--->     <option value="top100">Top 100</option>
-  </select>
 
-  Top notifiers
-
-</h3>
-    <table class="table-stat top50">
-      <thead>
-      <tr>
-        <th>Notifiers:</th>
-        <th>Number of emails reported:</th>
-      </tr>
-      </thead>
-
-    <tbody>
-        {% for emails in emails %}
-      <tr>
-        <td>{{ emails.outerFrom }}</td>
-        <td>{{ emails.reported }}</td>
-      </tr>
-      {% endfor %}
-
-        {% if emails is empty %}
-        <tr>
-            <td colspan="3">There are no emails registered yet!</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-</div>
-<div id="tab-7-pane" class="stat-tab-pane hidden">
-    <table class="stat-group">
-<tr>
-<td class="stat-group-item">
-  <div class="stat" id="stat-7">
-  </td>
-</tr>
-<div class="subtitle">
-</div>
-<h3>
-  <select onchange="toggleTableStatTop(this)">
-    <option value="top50">50</option>
-<!--
-    <option value="top25">Top 25</option>
-    <option value="top50">Top 50</option>
--->     <option value="top100">Top 100</option>
-  </select>
-
-  Top time of reporting
-
-</h3>
-    <table class="table-stat top50">
-      <thead>
-      <tr>
-        <th>Date:</th>
-      </tr>
-      </thead>
-
-    <tbody>
-        {% for emails in emails %}
-      <tr>
-        <td>{{ emails.outerdate }}</td>
-      </tr>
-      {% endfor %}
-
-        {% if emails is empty %}
-        <tr>
-            <td colspan="3">There are no emails registered yet!</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-</div>
 <script type="text/javascript">
   toggleTabStat('tab-0');
 </script>

@@ -86,6 +86,12 @@ $app->post('/emailsforusers', $ns . 'EmailsController:searchforusers');
 
 $app->get('/emails/:emailsID', $ns . 'EmailsController:show');
 $app->get('/mailtrends', $ns . 'EmailsController:mailtrends')->name('mailtrends');
+$app->get('/mailtrends/topsize', $ns . 'EmailsController:topsize')->name('topsize');
+$app->get('/mailtrends/topsenders', $ns . 'EmailsController:topsenders')->name('topsenders');
+$app->get('/mailtrends/topnotifiers', $ns . 'EmailsController:topnotifiers')->name('topnotifiers');
+$app->get('/mailtrends/topemails', $ns . 'EmailsController:topemails')->name('topemails');
+$app->get('/mailtrends/timeofrecemails', $ns . 'EmailsController:timeofrecemails')->name('timeofrecemails');
+$app->get('/mailtrends/timeofrepemails', $ns . 'EmailsController:timeofrepemails')->name('timeofrepemails');
 
 // Admin restricted area
 $app->post('/admin', $ns . 'EmailsController:searchAdmin');

@@ -42,10 +42,172 @@ class EmailsController extends Controller
       }
   }
 
+  public function topsenders()
+  {
+    if ($this->auth->guest()) {
+        $this->app->flash('info', 'You must be logged in to see emails');
+        $this->app->redirect("/login");
+    }
+
+    $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+    if ($emails != null)
+    {
+      if (!$this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/topsenders.twig', ['emails' => $emails]);
+
+        }
+
+      if ($this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/topsenders.twig', ['emails' => $emails]);
+      }
+  }else {
+    $this->app->flash('info', 'No emails available');
+    $this->app->redirect("/mailtrends");
+
+    }
+}
+
+public function topnotifiers()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topnotifiers.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topnotifiers.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
+public function topsize()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topsize.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topsize.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
+public function topemails()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topemails.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topemails.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
+public function timeofrecemails()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/timeofrecemails.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/timeofrecemails.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
+public function timeofrepemails()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/timeofrepemails.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/timeofrepemails.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
   public function mailtrends()
   {
     if ($this->auth->guest()) {
-        $this->app->flash('info', 'You must be logged in to see Mail Trends');
+        $this->app->flash('info', 'You must be logged in to see Email Trends');
         $this->app->redirect("/login");
     }
 

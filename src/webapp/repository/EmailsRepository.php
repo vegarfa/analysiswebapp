@@ -174,4 +174,40 @@ class EmailsRepository {
 		return $emailData;
 	}
 
+	public function sorttopemails($emailDataObjects) {
+		$sortArray = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
+			$emailData[$index]["email_timestamp"] = $emailArr['email_timestamp'] = strtotime($emailArr['innerdate']);
+
+			foreach ($emailArr as $key => $value) {
+				if (!isset($sortArray[$key])) {
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+
+		$orderby = 'email_timestamp'; //change this to whatever key you want from the array
+//pr($sortArray);exit;
+
+		try{
+			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
+				return [];
+			}
+		array_multisort($sortArray[$orderby], SORT_DESC, $emailData);
+		}catch(Exception $e){
+
+	}
+		return $emailData;
+	}
+
 }

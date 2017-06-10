@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  {% set recipientVar = 'OJ! Email' %}
+  {% include 'components/head.twig' %}
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Mail Trends</title>
+
+  <script type="text/javascript" src="/css/jquery.js"></script>
+  <script type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <script type="text/javascript" src="/css/main.js"></script>
+</head>
+<body>
+  <div class="ui grey fixed inverted menu">
+      {% include 'components/menu.twig' %}
+  </div>
+
+  <div id="primary-content" class="ui grid container">
+      <div class="three wide column">
+          <div class="ui secondary vertical pointing fluid menu">
+              {% if isLoggedIn %}
+              <a href="{{ urlFor('topemails') }}" class="item">Top emails</a>
+              <a href="{{ urlFor('topsenders') }}" class="item">Top senders</a>
+              <a href="{{ urlFor('topsize') }}" class="item">Top size</a>
+              <a href="{{ urlFor('topnotifiers') }}" class="item">Top notifiers</a>
+              <a href="{{ urlFor('timeofrecemails') }}" class="item">Time of received email</a>
+              <a href="{{ urlFor('timeofrepemails') }}" class="item">Time of reported email</a>
+              <a href="{{ urlFor('mailtrends') }}" class="item">Email trends</a>
+              {% endif %}
+          </div>
+      </div>
+
+      <div class="subtitle">
+        <h1>Email Trends</h1>
+      {% set emailcounter = 0 %}
+      {% for emails in emails %}
+      {% set emailcounter = emailcounter + 1 %}
+      {% endfor %}
+    <h3>{{ emailcounter }} emails reported between
+    {% for emails in emails %}
+      {% if loop.last %}
+        {{ emails.innerdate }}
+        {% endif %}
+    {% endfor %}
+    and
+    {% for emails in emails %}
+      {% if loop.first %}
+        {{ emails.innerdate }}
+        {% endif %}
+    {% endfor %}
+    </h3>
+
+    <h2> Top senders </h2>
+      </div>
+  <div class="stat-tabs">
+  <ul class="stat-tabs-titles">
+      <li onclick="toggleTabStat('tab-0')" id="tab-0-title" class="stat-tab-title unselectable">Top senders</li>
+  </ul>
+
+  <div id="tab-0-pane" class="stat-tab-pane hidden">
+      <table class="stat-group">
+<tr>
+  <td class="stat-group-item">
+    <div class="stat table-stat-container" id="stat-1">
+    </td>
+  </tr>
+  <h3>
+    <select onchange="toggleTableStatTop(this)">
+      <option value="top50">50</option>
+<!--
+      <option value="top25">25</option>
+      <option value="top100">100</option>
+-->
+    </select>
+
+  Top senders
+
+  </h3>
+      <table class="table-stat top50">
+        <thead>
+        <tr>
+          <th>From:</th>
+          <th>Number of emails:</th>
+        </tr>
+        </thead>
+
+      <tbody>
+          {% for emails in emails|slice(0,50) %}
+
+        <tr>
+          <td>{{ emails.innerFrom }}</td>
+          <td>Not implemented</td>
+        </tr>
+        {% endfor %}
+
+          {% if emails is empty %}
+          <tr>
+              <td colspan="3">There are no emails registered yet!</td>
+          </tr>
+          {% endif %}
+      </tbody>
+  </table>
+  </div>
+
+        {% if emails is empty %}
+        <tr>
+            <td colspan="3">There are no emails registered yet!</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+</div>
+<script type="text/javascript">
+  toggleTabStat('tab-0');
+</script>
+</body>
+</html>
