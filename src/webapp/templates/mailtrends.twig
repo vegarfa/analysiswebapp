@@ -52,6 +52,8 @@ and
     {% endif %}
 {% endfor %}
 </h3>
+
+<h2> Mainpage </h2>
   </div>
 
 <div class="subtitle">
@@ -59,7 +61,6 @@ and
   <div class="stat-tabs">
   <ul class="stat-tabs-titles">
       <li onclick="toggleTabStat('tab-0')" id="tab-0-title" class="stat-tab-title unselectable">Last received emails </li>
-      <li onclick="toggleTabStat('tab-1')" id="tab-1-title" class="stat-tab-title unselectable">Last reported emails </li>
   </ul>
 
   <div id="tab-0-pane" class="stat-tab-pane hidden">
@@ -108,53 +109,6 @@ and
       </tbody>
   </table>
   </div>
-
-  <div id="tab-1-pane" class="stat-tab-pane hidden">
-      <table class="stat-group">
-<tr>
-  <td class="stat-group-item">
-    <div class="stat table-stat-container" id="stat-1">
-    </td>
-  </tr>
-  <h3>
-    <select onchange="toggleTableStatTop(this)">
-      <option value="top50">50</option>
-<!--
-      <option value="top25">25</option>
-      <option value="top100">100</option>
--->
-    </select>
-
-  Last reported emails by date and time
-
-</h3>
-    <table class="table-stat top50">
-      <thead>
-      <tr>
-        <th>From:</th>
-        <th>Subject:</th>
-        <th>Date:</th>
-      </tr>
-      </thead>
-
-    <tbody>
-        {% for emails in emails|slice(0,50) %}
-
-      <tr>
-        <td>{{ emails.innerFrom }}</td>
-        <td>{{ emails.innersubject }}</td>
-        <td>{{ emails.outerdate }}</td>
-      </tr>
-      {% endfor %}
-
-        {% if emails is empty %}
-        <tr>
-            <td colspan="3">There are no emails registered yet!</td>
-        </tr>
-        {% endif %}
-    </tbody>
-</table>
-</div>
 
 <script type="text/javascript">
   toggleTabStat('tab-0');

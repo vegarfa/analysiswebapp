@@ -174,8 +174,9 @@ class EmailsRepository {
 		return $emailData;
 	}
 
-	public function sorttopemails($emailDataObjects) {
+	public function sorttopnotifiers($emailDataObjects) {
 		$sortArray = array();
+		//$sortCount = array();
 
 		if(!$emailDataObjects){
 
@@ -186,7 +187,7 @@ class EmailsRepository {
 			$emailArr = json_decode(json_encode($email),true);
 			$emailData[$index] = $emailArr;
 			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
-			$emailData[$index]["email_timestamp"] = $emailArr['email_timestamp'] = strtotime($emailArr['innerdate']);
+			$emailData[$index]["outerFrom"] = $emailArr['outerFrom'];
 
 			foreach ($emailArr as $key => $value) {
 				if (!isset($sortArray[$key])) {
@@ -194,9 +195,10 @@ class EmailsRepository {
 				}
 				$sortArray[$key][] = $value;
 			}
+			
 		}
 
-		$orderby = 'email_timestamp'; //change this to whatever key you want from the array
+		$orderby = 'outerFrom'; //change this to whatever key you want from the array
 //pr($sortArray);exit;
 
 		try{
@@ -210,4 +212,39 @@ class EmailsRepository {
 		return $emailData;
 	}
 
+	public function sorttopsenders($emailDataObjects) {
+		$sortArray = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
+			$emailData[$index]["innerFrom"] = $emailArr['innerFrom'];
+
+			foreach ($emailArr as $key => $value) {
+				if (!isset($sortArray[$key])) {
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+
+		$orderby = 'innerFrom'; //change this to whatever key you want from the array
+//pr($sortArray);exit;
+
+		try{
+			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
+				return [];
+			}
+		array_multisort($sortArray[$orderby], SORT_DESC, $emailData);
+		}catch(Exception $e){
+
+	}
+		return $emailData;
+	}
 }

@@ -76,7 +76,7 @@ public function topnotifiers()
       $this->app->redirect("/login");
   }
 
-  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  $emails = $this->emailRepository->sorttopnotifiers($this->emailRepository->all());
   if ($emails != null)
   {
     if (!$this->auth->isAdmin()) {
