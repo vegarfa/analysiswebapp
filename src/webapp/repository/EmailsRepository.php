@@ -275,13 +275,14 @@ class EmailsRepository {
 		}
 
 		$orderby = 'innerFrom'; //change this to whatever key you want from the array
+		$topdomains = preg_replace('/^[^@]*@\s*/', '', $sortArray[$orderby]);
 	//pr($sortArray);exit;
 
 		try{
-			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
+			if(!isset($topdomains) || !is_array($topdomains)){
 				return [];
 			}
-		$count = array_count_values($sortArray[$orderby]);
+		$count = array_count_values($topdomains);
 		arsort($count);
 		}catch(Exception $e){
 
