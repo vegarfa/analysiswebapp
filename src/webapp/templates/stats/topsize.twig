@@ -5,7 +5,7 @@
   {% set recipientVar = 'OJ! Email' %}
   {% include 'components/head.twig' %}
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Mail Trends</title>
+  <title>Mail Trends - Top size</title>
 
   <script type="text/javascript" src="/css/jquery.js"></script>
   <script type="text/javascript"></script>
@@ -21,37 +21,22 @@
   <div id="primary-content" class="ui grid container">
       <div class="three wide column">
           <div class="ui secondary vertical pointing fluid menu">
-              {% if isLoggedIn %}
-              <a href="{{ urlFor('topemails') }}" class="item">Top emails</a>
-              <a href="{{ urlFor('topsenders') }}" class="item">Top senders</a>
-              <a href="{{ urlFor('topsize') }}" class="item">Top size</a>
-              <a href="{{ urlFor('topnotifiers') }}" class="item">Top notifiers</a>
-              <a href="{{ urlFor('timeofrecemails') }}" class="item">Time of received email</a>
-              <a href="{{ urlFor('timeofrepemails') }}" class="item">Time of reported email</a>
-              <a href="{{ urlFor('mailtrends') }}" class="item">Email trends</a>
-              {% endif %}
+            {% if isLoggedIn %}
+            <a href="{{ urlFor('topemails') }}" class="item">Top emails</a>
+            <a href="{{ urlFor('topsenders') }}" class="item">Top senders</a>
+            <a href="{{ urlFor('topdomains') }}" class="item">Top sender domains</a>
+            <a href="{{ urlFor('topsize') }}" class="item">Top size</a>
+            <a href="{{ urlFor('topnotifiers') }}" class="item">Top notifiers</a>
+            <a href="{{ urlFor('timeofrecemails') }}" class="item">Time of received email</a>
+            <a href="{{ urlFor('timeofrepemails') }}" class="item">Time of reported email</a>
+            <a href="{{ urlFor('mailtrends') }}" class="item">Email trends</a>
+            {% endif %}
           </div>
       </div>
 
       <div class="subtitle">
         <h1>Email Trends</h1>
-      {% set emailcounter = 0 %}
-      {% for emails in emails %}
-      {% set emailcounter = emailcounter + 1 %}
-      {% endfor %}
-    <h3>{{ emailcounter }} emails reported between
-    {% for emails in emails %}
-      {% if loop.last %}
-        {{ emails.innerdate }}
-        {% endif %}
-    {% endfor %}
-    and
-    {% for emails in emails %}
-      {% if loop.first %}
-        {{ emails.innerdate }}
-        {% endif %}
-    {% endfor %}
-    </h3>
+        
     <h2> Top size </h2>
       </div>
   <div class="stat-tabs">

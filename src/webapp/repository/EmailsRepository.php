@@ -204,16 +204,18 @@ class EmailsRepository {
 			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
 				return [];
 			}
-		array_multisort($sortArray[$orderby], SORT_DESC, $emailData);
+		$count = array_count_values($sortArray[$orderby]);
+		arsort($count);
 		}catch(Exception $e){
 
 	}
 
-		return $emailData;
+		return $count;
 	}
 
 	public function sorttopsenders($emailDataObjects) {
 		$sortArray = array();
+		//$sortCount = array();
 
 		if(!$emailDataObjects){
 
@@ -235,16 +237,56 @@ class EmailsRepository {
 		}
 
 		$orderby = 'innerFrom'; //change this to whatever key you want from the array
-//pr($sortArray);exit;
+	//pr($sortArray);exit;
 
 		try{
 			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
 				return [];
 			}
-		array_multisort($sortArray[$orderby], SORT_DESC, $emailData);
+		$count = array_count_values($sortArray[$orderby]);
+		arsort($count);
 		}catch(Exception $e){
 
 	}
-		return $emailData;
+		return $count;
 	}
+
+	public function sorttopdomains($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
+			$emailData[$index]["innerFrom"] = $emailArr['innerFrom'];
+
+			foreach ($emailArr as $key => $value) {
+				if (!isset($sortArray[$key])) {
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+
+		$orderby = 'innerFrom'; //change this to whatever key you want from the array
+	//pr($sortArray);exit;
+
+		try{
+			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
+				return [];
+			}
+		$count = array_count_values($sortArray[$orderby]);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
 }

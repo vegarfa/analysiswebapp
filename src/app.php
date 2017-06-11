@@ -92,6 +92,7 @@ $app->get('/mailtrends/topnotifiers', $ns . 'EmailsController:topnotifiers')->na
 $app->get('/mailtrends/topemails', $ns . 'EmailsController:topemails')->name('topemails');
 $app->get('/mailtrends/timeofrecemails', $ns . 'EmailsController:timeofrecemails')->name('timeofrecemails');
 $app->get('/mailtrends/timeofrepemails', $ns . 'EmailsController:timeofrepemails')->name('timeofrepemails');
+$app->get('/mailtrends/topdomains', $ns . 'EmailsController:topdomains')->name('topdomains');
 
 // Admin restricted area
 $app->post('/admin', $ns . 'EmailsController:searchAdmin');

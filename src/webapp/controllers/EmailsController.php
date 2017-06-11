@@ -49,7 +49,7 @@ class EmailsController extends Controller
         $this->app->redirect("/login");
     }
 
-    $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+    $emails = $this->emailRepository->sorttopsenders($this->emailRepository->all());
     if ($emails != null)
     {
       if (!$this->auth->isAdmin()) {
@@ -115,6 +115,33 @@ public function topsize()
     if ($this->auth->isAdmin()) {
         #$emails = $this->emailRepository->all();
         $this->render('stats/topsize.twig', ['emails' => $emails]);
+    }
+}else {
+  $this->app->flash('info', 'No emails available');
+  $this->app->redirect("/mailtrends");
+
+  }
+}
+
+public function topdomains()
+{
+  if ($this->auth->guest()) {
+      $this->app->flash('info', 'You must be logged in to see emails');
+      $this->app->redirect("/login");
+  }
+
+  $emails = $this->emailRepository->sorttopdomains($this->emailRepository->all());
+  if ($emails != null)
+  {
+    if (!$this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topdomains.twig', ['emails' => $emails]);
+
+      }
+
+    if ($this->auth->isAdmin()) {
+        #$emails = $this->emailRepository->all();
+        $this->render('stats/topdomains.twig', ['emails' => $emails]);
     }
 }else {
   $this->app->flash('info', 'No emails available');

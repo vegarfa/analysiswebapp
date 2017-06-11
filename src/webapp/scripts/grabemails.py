@@ -30,9 +30,8 @@ from email.header import Header, decode_header, make_header
 moveEmailsOnComplete=False
 # Log in parameters
 EMAIL_ACCOUNT = "inbox@automaticanalysis.eu"
-EMAIL_FOLDER = "Inbox.NOTprocessed"
+EMAIL_FOLDER = "Inbox"
 EMAIL_PASSWORD = getpass.getpass()
-EMAIL_PASSWORD = "69GoIkIz"
 M = imaplib.IMAP4_SSL('e36.ehosts.com')
 mongoConnectn = MongoClient("mongodb://localhost:27017")
 
