@@ -208,8 +208,6 @@ class EmailsRepository {
 		}catch(Exception $e){
 
 	}
-		$count = array_count_values($sortArray[$orderby]);
-		$good = arsort($count);
 
 		return $emailData;
 	}
