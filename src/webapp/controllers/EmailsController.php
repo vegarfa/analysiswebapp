@@ -157,7 +157,7 @@ public function topemails()
       $this->app->redirect("/login");
   }
 
-  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  $emails = $this->emailRepository->sorttopemails($this->emailRepository->all());
   if ($emails != null)
   {
     if (!$this->auth->isAdmin()) {

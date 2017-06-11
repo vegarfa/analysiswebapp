@@ -275,7 +275,7 @@ class EmailsRepository {
 		}
 
 		$orderby = 'innerFrom'; //change this to whatever key you want from the array
-		$topdomains = preg_replace('/^[^@]*@\s*/', '', $sortArray[$orderby]);
+		$topdomains = preg_replace('/^.*@\s*/', '', $sortArray[$orderby]);
 	//pr($sortArray);exit;
 
 		try{
@@ -283,6 +283,44 @@ class EmailsRepository {
 				return [];
 			}
 		$count = array_count_values($topdomains);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
+	public function sorttopemails($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
+			$emailData[$index]["innersubject"] = $emailArr['innersubject'];
+
+			foreach ($emailArr as $key => $value) {
+				if (!isset($sortArray[$key])) {
+					$sortArray[$key] = array();
+				}
+				$sortArray[$key][] = $value;
+			}
+		}
+
+		$orderby = 'innersubject'; //change this to whatever key you want from the array
+	//pr($sortArray);exit;
+
+		try{
+			if(!isset($sortArray[$orderby]) || !is_array($sortArray[$orderby])){
+				return [];
+			}
+		$count = array_count_values($sortArray[$orderby]);
 		arsort($count);
 		}catch(Exception $e){
 

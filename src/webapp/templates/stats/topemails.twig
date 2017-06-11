@@ -73,12 +73,12 @@
         </thead>
 
       <tbody>
-          {% for emails in emails|slice(0,50) %}
+          {% for key, value in emails|slice(0,50) %}
 
         <tr>
-          <td>{{ emails.innerFrom }}</td>
-          <td>{{ emails.innersubject }}</td>
           <td>Not implemented</td>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
         </tr>
         {% endfor %}
 
