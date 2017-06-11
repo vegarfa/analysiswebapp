@@ -195,7 +195,6 @@ class EmailsRepository {
 				}
 				$sortArray[$key][] = $value;
 			}
-			
 		}
 
 		$orderby = 'outerFrom'; //change this to whatever key you want from the array
@@ -209,6 +208,9 @@ class EmailsRepository {
 		}catch(Exception $e){
 
 	}
+		$count = array_count_values($sortArray[$orderby]);
+		$good = arsort($count);
+
 		return $emailData;
 	}
 
