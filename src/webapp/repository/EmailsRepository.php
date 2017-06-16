@@ -304,6 +304,7 @@ class EmailsRepository {
 			$emailData[$index] = $emailArr;
 			$emailData[$index]['_id']=$emailData[$index]['emailsID'] = (string) $email->_id;
 			$emailData[$index]["innersubject"] = $emailArr['innersubject'];
+			//$emailData[$index]["innerFrom"] = $emailArr['innerFrom'];
 
 			foreach ($emailArr as $key => $value) {
 				if (!isset($sortArray[$key])) {
