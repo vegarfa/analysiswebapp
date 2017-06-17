@@ -73,7 +73,7 @@ and
   </tr>
   <h3>
     <select onchange="toggleTableStatTop(this)">
-      <option value="top50">50</option>
+      <option value="top100">100</option>
 <!--
       <option value="top25">25</option>
       <option value="top100">100</option>
@@ -83,7 +83,7 @@ and
   Last received emails by date and time
 
   </h3>
-      <table class="table-stat top50">
+      <table class="table-stat top100">
         <thead>
         <tr>
           <th>From:</th>
@@ -93,7 +93,7 @@ and
         </thead>
 
       <tbody>
-          {% for emails in emails|slice(0,50) %}
+          {% for emails in emails|slice(0,100) %}
 
         <tr>
           <td>{{ emails.innerFrom }}</td>

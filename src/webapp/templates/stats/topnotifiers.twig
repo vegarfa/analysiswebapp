@@ -53,7 +53,7 @@
   </tr>
   <h3>
     <select onchange="toggleTableStatTop(this)">
-      <option value="top50">50</option>
+      <option value="top100">100</option>
 <!--
       <option value="top25">25</option>
       <option value="top100">100</option>
@@ -63,7 +63,7 @@
   Top notifiers
 
   </h3>
-      <table class="table-stat top50">
+      <table class="table-stat top100">
         <thead>
         <tr>
           <th>From:</th>
@@ -72,7 +72,7 @@
         </thead>
 
       <tbody>
-          {% for key, value in emails|slice(0,50) %}
+          {% for key, value in emails|slice(0,100) %}
 
         <tr>
           <td>{{ key }}</td>

@@ -184,7 +184,7 @@ public function timeofrecemails()
       $this->app->redirect("/login");
   }
 
-  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  $emails = $this->emailRepository->sortrecemails($this->emailRepository->all());
   if ($emails != null)
   {
     if (!$this->auth->isAdmin()) {
@@ -211,7 +211,7 @@ public function timeofrepemails()
       $this->app->redirect("/login");
   }
 
-  $emails = $this->emailRepository->sortEmailsByDate($this->emailRepository->all());
+  $emails = $this->emailRepository->sortrepemails($this->emailRepository->all());
   if ($emails != null)
   {
     if (!$this->auth->isAdmin()) {
