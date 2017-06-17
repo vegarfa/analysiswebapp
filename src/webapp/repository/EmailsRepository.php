@@ -290,6 +290,143 @@ class EmailsRepository {
 		return $count;
 	}
 
+	public function sortmarkedassafe($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+		}
+		foreach ($emailData as $key => $value) {
+			if (isset($value['xmsexchangeorganizationscl'])){
+			if ($value['xmsexchangeorganizationscl'] == -1)
+			{
+			$sortArray[$key] = $value["innerFrom"] . ": \x20\x20\x20 " . $value["innersubject"];
+		}
+	}
+}
+	//pr($sortArray);
+	//exit;
+		try{
+			if(!isset($sortArray) || !is_array($sortArray)){
+				return [];
+			}
+		$count = array_count_values($sortArray);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
+	public function sortnoscl($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+		}
+		foreach ($emailData as $key => $value) {
+			if (!isset($value['xmsexchangeorganizationscl'])){
+			$sortArray[$key] = $value["innerFrom"] . ": \x20\x20\x20 " . $value["innersubject"];
+	}
+	}
+	//pr($sortArray);
+	//exit;
+		try{
+			if(!isset($sortArray) || !is_array($sortArray)){
+				return [];
+			}
+		$count = array_count_values($sortArray);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
+	public function sortmarkednotasspam($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+		}
+		foreach ($emailData as $key => $value) {
+			if (isset($value['xmsexchangeorganizationscl'])){
+			if ($value['xmsexchangeorganizationscl'] < 4)
+			{
+			$sortArray[$key] = $value["innerFrom"] . ": \x20\x20\x20 " . $value["innersubject"];
+		}
+	}
+}
+	//pr($sortArray);
+	//exit;
+		try{
+			if(!isset($sortArray) || !is_array($sortArray)){
+				return [];
+			}
+		$count = array_count_values($sortArray);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
+	public function sortmarkedasspam($emailDataObjects) {
+		$sortArray = array();
+		//$sortCount = array();
+
+		if(!$emailDataObjects){
+
+			return $emailDataObjects;
+		}
+	$emailData = [];
+		foreach ($emailDataObjects as $index=>$email) {
+			$emailArr = json_decode(json_encode($email),true);
+			$emailData[$index] = $emailArr;
+		}
+		foreach ($emailData as $key => $value) {
+			if (isset($value['xmsexchangeorganizationscl'])){
+			if ($value['xmsexchangeorganizationscl'] >= 4)
+			{
+			$sortArray[$key] = $value["innerFrom"] . ": \x20\x20\x20 " . $value["innersubject"];
+		}
+	}
+}
+	//pr($sortArray);
+	//exit;
+		try{
+			if(!isset($sortArray) || !is_array($sortArray)){
+				return [];
+			}
+		$count = array_count_values($sortArray);
+		arsort($count);
+		}catch(Exception $e){
+
+	}
+		return $count;
+	}
+
 	public function sorttopemails($emailDataObjects) {
 		$sortArray = array();
 		//$sortCount = array();

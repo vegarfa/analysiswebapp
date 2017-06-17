@@ -93,6 +93,11 @@ $app->get('/mailtrends/topemails', $ns . 'EmailsController:topemails')->name('to
 $app->get('/mailtrends/timeofrecemails', $ns . 'EmailsController:timeofrecemails')->name('timeofrecemails');
 $app->get('/mailtrends/timeofrepemails', $ns . 'EmailsController:timeofrepemails')->name('timeofrepemails');
 $app->get('/mailtrends/topdomains', $ns . 'EmailsController:topdomains')->name('topdomains');
+$app->get('/mailtrends/markedasspam', $ns . 'EmailsController:markedasspam')->name('markedasspam');
+$app->get('/mailtrends/markednotasspam', $ns . 'EmailsController:markednotasspam')->name('markednotasspam');
+$app->get('/mailtrends/markedassafe', $ns . 'EmailsController:markedassafe')->name('markedassafe');
+$app->get('/mailtrends/noscl', $ns . 'EmailsController:sortnoscl')->name('sortnoscl');
+
 
 // Admin restricted area
 $app->post('/admin', $ns . 'EmailsController:searchAdmin');

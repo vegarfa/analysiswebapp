@@ -42,6 +42,114 @@ class EmailsController extends Controller
       }
   }
 
+  public function sortnoscl()
+  {
+    if ($this->auth->guest()) {
+        $this->app->flash('info', 'You must be logged in to see emails');
+        $this->app->redirect("/login");
+    }
+
+    $emails = $this->emailRepository->sortnoscl($this->emailRepository->all());
+    if ($emails != null)
+    {
+      if (!$this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/noscl.twig', ['emails' => $emails]);
+
+        }
+
+      if ($this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/noscl.twig', ['emails' => $emails]);
+      }
+  }else {
+    $this->app->flash('info', 'No emails available');
+    $this->app->redirect("/mailtrends");
+
+    }
+}
+
+  public function markedassafe()
+  {
+    if ($this->auth->guest()) {
+        $this->app->flash('info', 'You must be logged in to see emails');
+        $this->app->redirect("/login");
+    }
+
+    $emails = $this->emailRepository->sortmarkedassafe($this->emailRepository->all());
+    if ($emails != null)
+    {
+      if (!$this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markedassafe.twig', ['emails' => $emails]);
+
+        }
+
+      if ($this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markedassafe.twig', ['emails' => $emails]);
+      }
+  }else {
+    $this->app->flash('info', 'No emails available');
+    $this->app->redirect("/mailtrends");
+
+    }
+}
+
+  public function markednotasspam()
+  {
+    if ($this->auth->guest()) {
+        $this->app->flash('info', 'You must be logged in to see emails');
+        $this->app->redirect("/login");
+    }
+
+    $emails = $this->emailRepository->sortmarkednotasspam($this->emailRepository->all());
+    if ($emails != null)
+    {
+      if (!$this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markednotasspam.twig', ['emails' => $emails]);
+
+        }
+
+      if ($this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markednotasspam.twig', ['emails' => $emails]);
+      }
+  }else {
+    $this->app->flash('info', 'No emails available');
+    $this->app->redirect("/mailtrends");
+
+    }
+}
+
+  public function markedasspam()
+  {
+    if ($this->auth->guest()) {
+        $this->app->flash('info', 'You must be logged in to see emails');
+        $this->app->redirect("/login");
+    }
+
+    $emails = $this->emailRepository->sortmarkedasspam($this->emailRepository->all());
+    if ($emails != null)
+    {
+      if (!$this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markedasspam.twig', ['emails' => $emails]);
+
+        }
+
+      if ($this->auth->isAdmin()) {
+          #$emails = $this->emailRepository->all();
+          $this->render('stats/markedasspam.twig', ['emails' => $emails]);
+      }
+  }else {
+    $this->app->flash('info', 'No emails available');
+    $this->app->redirect("/mailtrends");
+
+    }
+}
+
   public function topsenders()
   {
     if ($this->auth->guest()) {
