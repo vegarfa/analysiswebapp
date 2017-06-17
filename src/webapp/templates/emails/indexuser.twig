@@ -8,13 +8,13 @@
         </div>
     {% endif %}
 
-    <h2>Search for Emails</h2>
+    <h2>Search in reported emails</h2>
     {% set searchcounter = 0 %}
     {% for searchWord in search %}
     {% set searchcounter = searchcounter + 1 %}
     {% endfor %}
     <div class="subtitle">
-      <h3>Number of emails matched search criteria: {{ searchcounter }} </h3>
+      <h3>Number of reported emails that matched your search criteria: {{ searchcounter }} </h3>
     </div>
 
     <form action="" method="post" class="ui form">
@@ -65,7 +65,7 @@
       <input type="hidden" name="token" value="{{ token }}">
     </form>
 
-    <h2>Emails</h2>
+    <h2>Reported emails</h2>
     {% set counter = 0 %}
     {% for emails in emails %}
     {% set counter = counter + 1 %}
