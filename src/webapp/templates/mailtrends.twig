@@ -47,13 +47,13 @@
 <h3>{{ emailcounter }} emails reported between
 {% for emails in emails %}
   {% if loop.last %}
-    {{ emails.innerdate }}
+    {{ emails.outerdate }}
     {% endif %}
 {% endfor %}
 and
 {% for emails in emails %}
   {% if loop.first %}
-    {{ emails.innerdate }}
+    {{ emails.outerdate }}
     {% endif %}
 {% endfor %}
 </h3>
