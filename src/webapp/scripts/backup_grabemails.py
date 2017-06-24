@@ -25,10 +25,10 @@ import datetime
 from emlparser import decode_email_s
 
 # Log in parameters
-EMAIL_ACCOUNT = "inbox@automaticanalysis.eu"
-EMAIL_FOLDER = "Inbox"
+EMAIL_ACCOUNT = ""
+EMAIL_FOLDER = ""
 EMAIL_PASSWORD = getpass.getpass()
-M = imaplib.IMAP4_SSL('e36.ehosts.com')
+M = imaplib.IMAP4_SSL('')
 
 invalid_chars_in_filename='<>:"/\\|?*\%\''+reduce(lambda x,y:x+chr(y), range(32), '')
 invalid_windows_name='CON PRN AUX NUL COM1 COM2 COM3 COM4 COM5 COM6 COM7 COM8 COM9 LPT1 LPT2 LPT3 LPT4 LPT5 LPT6 LPT7 LPT8 LPT9'.split()

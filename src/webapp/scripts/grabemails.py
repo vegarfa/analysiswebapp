@@ -29,10 +29,10 @@ from email.header import Header, decode_header, make_header
 
 moveEmailsOnComplete=False
 # Log in parameters
-EMAIL_ACCOUNT = "inbox@automaticanalysis.eu"
-EMAIL_FOLDER = "Inbox"
+EMAIL_ACCOUNT = ""
+EMAIL_FOLDER = ""
 EMAIL_PASSWORD = getpass.getpass()
-M = imaplib.IMAP4_SSL('e36.ehosts.com')
+M = imaplib.IMAP4_SSL('')
 mongoConnectn = MongoClient("mongodb://localhost:27017")
 
 # connect to the students database and the ctec121 collection
